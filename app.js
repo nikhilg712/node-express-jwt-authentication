@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes');
+const cookieParser = require('cookie-parser');
 const app = express();
 
 // middleware
 app.use(express.json())
 app.use(express.static('public'));
-
+app.use(cookieParser())
 // view engine
 app.set('view engine', 'ejs');
 
@@ -15,6 +16,14 @@ const dbURI = 'mongodb+srv://nikhilg7:Nikku123@nikhilcluster.4cgmevs.mongodb.net
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
+
+app.get('/setcookies',(req, res) => {
+  res.cookie('newUser',false);
+  res.send('cookie set')
+})  
+app.get('/read-cookies',(req, res) => {
+  const cookies = req.cookies 
+})  
 
 // routes
 app.get('/', (req, res) => res.render('home'));
