@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
 
-<form action="">
+<form>
   <h2>Log In</h2>
   <label for="email">E-mail</label>
   <input type="text" name="email" required />
@@ -35,7 +35,7 @@
         emailError.textContent = data.errors.email;
         passwordError.textContent = data.errors.password;
       } else if (data.user) {
-        location.assign("/");
+        location.assign("/smoothies");
       }
     } catch (error) {
       console.log(error);
